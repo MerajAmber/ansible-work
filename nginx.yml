@@ -1,0 +1,22 @@
+---
+- name: Install Nginx
+  hosts: servers
+  become: true
+  
+  tasks:
+    - name: Ensure Nginx is installed
+      ansible.builtin.package:
+        name: nginx
+        state: present
+
+    - name: Ensure Nginx service is started and enabled on boot
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Create a basic landing page
+      ansible.builtin.copy:
+        content: "<h1>Deployed via Ansible</h1>"
+        dest: /var/www/html/index.html
+        mode: '0644'

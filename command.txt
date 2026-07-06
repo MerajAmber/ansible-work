@@ -1,0 +1,24 @@
+#command to run palybook and check connectivity
+ansible -i inventory.ini servers -m ping # for checking servers connections or ssh connectivity
+ansible-playbook -i inventory.ini ansible_facts.yml ## Running any palybook
+ansible -i inventory.ini servers -m setup           #for checking ansible-facts
+ansible -i inventory.ini servers -m setup | grep "distribution"  #to get servers facts or server detail
+ansible-playbook -i inventory.ini show_secerets.yml
+
+---
+#secrets and vault encrypt password and api keys etc.
+create secrets --> 
+secrets.yml --> 
+vault_password.txt and chmod 600 rw permission to owner only --> "vault_password.txt"
+CMD to Encrypt "ansible-vault encrypt secrets.yml --vault-password-file vault_password.txt" -->
+CMD to Decrypt and Access "ansible-playbook -i inventory.ini show_secerets.yml --vault-password-file vault_password.txt"
+
+----  till 1:40 timestamp
+
+
+#Roles 1:40 to 2:15
+ansible-galaxy init role/docker # create role using package magr ansible-galaxy init
+
+
+
+#different os with terraform 2:20  to till end

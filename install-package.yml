@@ -1,0 +1,25 @@
+---
+- name: Install packages
+  hosts: servers
+  become: yes
+
+  vars:
+    pkglist:
+      - tree
+      - zip
+      - wget
+      - curl
+      - git
+
+  tasks:
+    - name: Install packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop: "{{ pkglist }}"
+
+    - name: Display installed package
+      debug:
+        msg: "Installed: {{ item }}"
+      loop: "{{ pkglist }}"
